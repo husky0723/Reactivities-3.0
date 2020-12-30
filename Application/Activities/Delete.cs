@@ -15,7 +15,6 @@ namespace Application.Activities
 
         public class Handler : IRequestHandler<Command>
         {
-            
             private readonly DataContext _context;
             public Handler(DataContext context)
             {
@@ -25,11 +24,11 @@ namespace Application.Activities
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
                 var activity = await _context.Activities.FindAsync(request.Id);
-                
-                if(activity == null)
-                    throw new Exception("Couldn't find activity");
 
-                _context.Remove(activity);
+                if (activity == null)
+                    throw new Exception("Could not find activity");
+
+                _context.Remove(activity);              
 
                 var success = await _context.SaveChangesAsync() > 0;
 

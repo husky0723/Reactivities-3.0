@@ -41,7 +41,7 @@ namespace Application.Activities
                     Venue = request.Venue
                 };
 
-                _context.Activities.AddRange(activity);
+                _context.Activities.Add(activity);
                 var success = await _context.SaveChangesAsync() > 0;
 
                 if (success) return Unit.Value;
