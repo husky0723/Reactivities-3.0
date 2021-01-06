@@ -1,10 +1,10 @@
 import React from 'react'
-import { FieldRenderProps } from "react-final-form";
-import { Form, FormFieldProps, Label } from "semantic-ui-react";
-import { DateTimePicker } from "react-widgets";
+import { FieldRenderProps } from 'react-final-form';
+import { FormFieldProps, Form, Label } from 'semantic-ui-react';
+import {DateTimePicker} from 'react-widgets';
 
 interface IProps
-  extends FieldRenderProps<Date, HTMLElement>,
+  extends FieldRenderProps<Date, HTMLInputElement>,
     FormFieldProps {}
 
 const DateInput: React.FC<IProps> = ({
@@ -18,7 +18,7 @@ const DateInput: React.FC<IProps> = ({
   }) => {
     return (
         <Form.Field error={touched && !!error} width={width}>
-        <DateTimePicker
+        <DateTimePicker 
             placeholder={placeholder}
             value={input.value || null}
             onChange={input.onChange}
@@ -29,7 +29,7 @@ const DateInput: React.FC<IProps> = ({
             {...rest}
         />
         {touched && error && (
-          <Label basic color="red">
+          <Label basic color='red'>
             {error}
           </Label>
         )}
@@ -37,4 +37,4 @@ const DateInput: React.FC<IProps> = ({
     )
 }
 
-export default DateInput;
+export default DateInput

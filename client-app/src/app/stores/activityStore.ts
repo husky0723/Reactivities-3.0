@@ -5,7 +5,7 @@ import agent from '../api/agent';
 import { history } from '../..';
 import { toast } from 'react-toastify';
 
-configure({ enforceActions: 'always' });
+configure({enforceActions: 'always'});
 
 class ActivityStore {
   @observable activityRegistry = new Map();
@@ -26,7 +26,7 @@ class ActivityStore {
       const date = activity.date.toISOString().split('T')[0];
       activities[date] = activities[date] ? [...activities[date], activity] : [activity];
       return activities;
-    }, {} as { [key: string]: IActivity[] }));
+    }, {} as {[key: string]: IActivity[]}));
   }
 
   @action loadActivities = async () => {
@@ -56,8 +56,8 @@ class ActivityStore {
       this.loadingInitial = true;
       try {
         activity = await agent.Activities.details(id);
-        runInAction('getting activity', () => {
-          activity.date = new Date(activity.date)
+        runInAction('getting activity',() => {
+          activity.date = new Date(activity.date);
           this.activity = activity;
           this.activityRegistry.set(activity.id, activity);
           this.loadingInitial = false;
@@ -87,13 +87,13 @@ class ActivityStore {
       runInAction('create activity', () => {
         this.activityRegistry.set(activity.id, activity);
         this.submitting = false;
-      });
+      })
       history.push(`/activities/${activity.id}`)
     } catch (error) {
       runInAction('create activity error', () => {
         this.submitting = false;
       })
-      toast.error('Problem submitting data')
+      toast.error('Problem submitting data');
       console.log(error.response);
     }
   };
@@ -106,14 +106,14 @@ class ActivityStore {
         this.activityRegistry.set(activity.id, activity);
         this.activity = activity;
         this.submitting = false;
-      });
+      })
       history.push(`/activities/${activity.id}`)
     } catch (error) {
       runInAction('edit activity error', () => {
         this.submitting = false;
       })
-      toast.error('Problem submitting data')
-      console.log(error.response);
+      toast.error('Problem submitting data');
+      console.log(error);
     }
   };
 
