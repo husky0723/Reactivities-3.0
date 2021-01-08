@@ -27,8 +27,7 @@
     "revalidate": "^1.2.0",
     "semantic-ui-react": "^0.88.1",
     "typescript": "3.7.2",
-    "uuid": "^3.3.3",
-    "web-vitals": "^1.0.1"
+    "uuid": "^3.3.3"
   },
   "scripts": {
     "start": "react-scripts start",

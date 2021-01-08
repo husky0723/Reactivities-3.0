@@ -1,18 +1,18 @@
-import { FORM_ERROR } from "final-form";
-import React, { useContext } from "react";
-import { Form as FinalForm, Field } from "react-final-form";
-import { combineValidators, isRequired } from "revalidate";
-import { Button, Form, Header } from "semantic-ui-react";
-import ErrorMessage from "../../app/common/form/ErrorMessage";
-import TextInput from "../../app/common/form/TextInput";
-import { IUserFormValues } from "../../app/models/user";
-import { RootStoreContext } from "../../app/stores/rootStore";
+import React, { useContext } from 'react';
+import { Form as FinalForm, Field } from 'react-final-form';
+import { Form, Button, Header } from 'semantic-ui-react';
+import TextInput from '../../app/common/form/TextInput';
+import { RootStoreContext } from '../../app/stores/rootStore';
+import { IUserFormValues } from '../../app/models/user';
+import { FORM_ERROR } from 'final-form';
+import { combineValidators, isRequired } from 'revalidate';
+import ErrorMessage from '../../app/common/form/ErrorMessage';
 
 const validate = combineValidators({
-  username: isRequired({ message: "The username is required" }),
-  displayName: isRequired({ message: "The user display name is required" }),
-  email: isRequired({ message: "The user email is required" }),
-  password: isRequired({ message: "The user password is" }),
+  username: isRequired('Username'),
+  displayName: isRequired('DisplayName'),
+  email: isRequired('Email'),
+  password: isRequired('Password')
 });
 
 const RegisterForm = () => {
@@ -22,7 +22,7 @@ const RegisterForm = () => {
     <FinalForm
       onSubmit={(values: IUserFormValues) =>
         register(values).catch(error => ({
-          [FORM_ERROR]: error,
+          [FORM_ERROR]: error
         }))
       }
       validate={validate}
@@ -32,35 +32,38 @@ const RegisterForm = () => {
         submitError,
         invalid,
         pristine,
-        dirtySinceLastSubmit,
+        dirtySinceLastSubmit
       }) => (
         <Form onSubmit={handleSubmit} error>
           <Header
-            as="h2"
-            content="Sign up to Reactivities"
-            color="teal"
-            text-align="center"
+            as='h2'
+            content='Sign up to Reactivities'
+            color='teal'
+            textAlign='center'
           />
-          <Field name="username" component={TextInput} placeholder="Username" />
-          <Field name="displayName" component={TextInput} placeholder="Display Name" />
-          <Field name="email" component={TextInput} placeholder="Email" />
+          <Field name='username' component={TextInput} placeholder='Username' />
           <Field
-            name="password"
+            name='displayName'
             component={TextInput}
-            placeholder="Password"
-            type="password"
+            placeholder='Display Name'
+          />
+          <Field name='email' component={TextInput} placeholder='Email' />
+          <Field
+            name='password'
+            component={TextInput}
+            placeholder='Password'
+            type='password'
           />
           {submitError && !dirtySinceLastSubmit && (
             <ErrorMessage
               error={submitError}
-              text="Invalid email or password"
             />
           )}
           <Button
             disabled={(invalid && !dirtySinceLastSubmit) || pristine}
             loading={submitting}
-            color="teal"
-            content="Resgister"
+            color='teal'
+            content='Register'
             fluid
           />
         </Form>
